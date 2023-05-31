@@ -1,29 +1,34 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useForm } from "react-hook-form";
 import './MainList.scss'
+import { addList } from '../../redux/dataSlice';
+
 
 const MainList = () => {
-
+ 
     const {list} = useSelector((state) => state.data)
-    
+    const dispatch = useDispatch()
    const { register, handleSubmit } = useForm();
    const onSubmit = (data) => {
-        
+      dispatch(addList(data))
+      
    }
 
   return (
     <div className='mainList'>
         {
             list.map(el => (
-                <div className='listItem'>{el.title}</div>
+                <div className='listItem'>
+                  <h3>{el.title}</h3>
+                </div>
             ))
         }
-        <div>
+        <div className='form'>
         <form onSubmit={handleSubmit(onSubmit)}>
         
           
-        <div>
+        <div className='addList' >
         <input
           placeholder="Text Giriniz"
           type="text"

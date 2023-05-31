@@ -12,8 +12,14 @@ export const dataSlice = createSlice({
     name:'data',
     initialState,
     reducers:{
+
      addList:(state,action)=>{
-        state.list = [...state.list,action.payload]
+       const obj = {
+        card:[],
+       id:state.list.length+1,
+       title:action.payload.title
+       }
+       state.list = [...state.list,obj]
      }
     }
 })
